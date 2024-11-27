@@ -18,7 +18,9 @@ class HeroSection extends StatelessWidget {
         ValueConstants.radius20Px(context),
       ),
       child: SizedBox(
-        height: ValueConstants.screenHeight(context) * 0.5,
+        height: ValueConstants.isMobileDevice(context)
+            ? ValueConstants.screenHeight(context) * 0.25
+            : ValueConstants.screenHeight(context) * 0.5,
         width: ValueConstants.screenWidth(context) * 0.95,
         child: Stack(
           children: [
@@ -39,11 +41,17 @@ class HeroSection extends StatelessWidget {
                 children: [
                   Text(
                     "WAGHADKAR HOSPITAL",
-                    style: TypographyConstants.textStyle44Pt(
-                      context,
-                      color: ColorConstants.textLowEm,
-                      isBold: true,
-                    ),
+                    style: ValueConstants.isMobileDevice(context)
+                        ? TypographyConstants.textStyle26Pt(
+                            context,
+                            color: ColorConstants.textLowEm,
+                            isBold: true,
+                          )
+                        : TypographyConstants.textStyle44Pt(
+                            context,
+                            color: ColorConstants.textLowEm,
+                            isBold: true,
+                          ),
                   ),
                   WidgetConstants.space16Pt(context: context, vertical: true),
                   Text(

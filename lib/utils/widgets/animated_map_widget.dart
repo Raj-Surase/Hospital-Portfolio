@@ -29,7 +29,9 @@ class _AnimatedMapWidgetState extends State<AnimatedMapWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final height = ValueConstants.screenHeight(context) * 0.7;
+    final height = ValueConstants.isMobileDevice(context)
+        ? ValueConstants.screenHeight(context) * 0.2
+        : ValueConstants.screenHeight(context) * 0.7;
     final width = ValueConstants.screenWidth(context) * 0.95;
 
     return MouseRegion(

@@ -22,119 +22,206 @@ class Footer extends StatelessWidget {
         ValueConstants.padding30Px(context),
       ),
       color: ColorConstants.containerBG,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          SizedBox(
-            width: ValueConstants.screenWidth(context) * 0.3,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: ValueConstants.isMobileDevice(context)
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
-                  children: [
-                    SizedBox(
-                      height: 50,
-                      width: 50,
-                      child: Image.asset(
-                        ImageConstants.logoImage,
+                SizedBox(
+                  width: ValueConstants.screenWidth(context),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 50,
+                            width: 50,
+                            child: Image.asset(
+                              ImageConstants.logoImage,
+                            ),
+                          ),
+                          WidgetConstants.space8Pt(
+                              context: context, vertical: false),
+                          Text(
+                            "Waghadkar Hospital",
+                            style: TypographyConstants.textStyle18Pt(
+                              context,
+                              color: ColorConstants.textHighEm,
+                              isBold: true,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    WidgetConstants.space8Pt(context: context, vertical: false),
-                    Text(
-                      "Waghadkar Hospital",
-                      style: TypographyConstants.textStyle18Pt(
-                        context,
-                        color: ColorConstants.textHighEm,
-                        isBold: true,
+                      WidgetConstants.space24Pt(
+                          vertical: true, context: context),
+                      Text(
+                        "Waghadkar General Hospital, \nDharangaon Road, near Sambhaji Statue, \nnear Vispute Saraf, Vivekanand Nagar, \nKopargaon, Maharashtra 423601",
+                        style: TypographyConstants.textStyle14Pt(
+                          context,
+                          color: ColorConstants.textHighEm,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                    ),
-                  ],
-                ),
-                WidgetConstants.space24Pt(vertical: true, context: context),
-                Text(
-                  "Waghadkar General Hospital, \nDharangaon Road, near Sambhaji Statue, \nnear Vispute Saraf, Vivekanand Nagar, \nKopargaon, Maharashtra 423601",
-                  style: TypographyConstants.textStyle14Pt(
-                    context,
-                    color: ColorConstants.textHighEm,
+                      WidgetConstants.space12Pt(
+                          vertical: true, context: context),
+                    ],
                   ),
                 ),
-                WidgetConstants.space12Pt(vertical: true, context: context),
-                // Row(
-                //   mainAxisSize: MainAxisSize.max,
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     IconButton(
-                //       onPressed: () {},
-                //       icon: Icon(
-                //         Icons.facebook_rounded,
-                //         size: ValueConstants.icon24Px(context),
-                //       ),
-                //     ),
-                //     IconButton(
-                //       onPressed: () {},
-                //       icon: Icon(
-                //         Icons.facebook_rounded,
-                //         size: ValueConstants.icon24Px(context),
-                //       ),
-                //     ),
-                //     IconButton(
-                //       onPressed: () {},
-                //       icon: Icon(
-                //         Icons.facebook_rounded,
-                //         size: ValueConstants.icon24Px(context),
-                //       ),
-                //     ),
-                //   ],
-                // ),
+                WidgetConstants.space64Pt(vertical: false, context: context),
+                SizedBox(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Get in touch.",
+                        style: TypographyConstants.textStyle26Pt(context,
+                            color: ColorConstants.textHighEm, isBold: false),
+                      ),
+                      WidgetConstants.space20Pt(
+                          vertical: true, context: context),
+                      ReusableTextField(
+                        labelText: "Email",
+                        controller: _emailController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your email or email';
+                          }
+                          return null;
+                        },
+                      ),
+                      WidgetConstants.space16Pt(
+                          vertical: true, context: context),
+                      ReusableTextField(
+                        labelText: "Message",
+                        controller: _bodyController,
+                        maxLines: 4,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the message';
+                          }
+                          return null;
+                        },
+                      ),
+                      WidgetConstants.space16Pt(
+                          vertical: true, context: context),
+                      ExpandedButton(
+                          color: ColorConstants.accentPurple,
+                          isFill: true,
+                          textColor: ColorConstants.textLowEm,
+                          text: "Send",
+                          onTap: () {}),
+                    ],
+                  ),
+                ),
               ],
-            ),
+            )
+          : desktopView(
+              emailController: _emailController,
+              bodyController: _bodyController),
+    );
+  }
+}
+
+class desktopView extends StatelessWidget {
+  const desktopView({
+    super.key,
+    required TextEditingController emailController,
+    required TextEditingController bodyController,
+  })  : _emailController = emailController,
+        _bodyController = bodyController;
+
+  final TextEditingController _emailController;
+  final TextEditingController _bodyController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        SizedBox(
+          width: ValueConstants.screenWidth(context) * 0.3,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: Image.asset(
+                      ImageConstants.logoImage,
+                    ),
+                  ),
+                  WidgetConstants.space8Pt(context: context, vertical: false),
+                  Text(
+                    "Waghadkar Hospital",
+                    style: TypographyConstants.textStyle18Pt(
+                      context,
+                      color: ColorConstants.textHighEm,
+                      isBold: true,
+                    ),
+                  ),
+                ],
+              ),
+              WidgetConstants.space24Pt(vertical: true, context: context),
+              Text(
+                "Waghadkar General Hospital, \nDharangaon Road, near Sambhaji Statue, \nnear Vispute Saraf, Vivekanand Nagar, \nKopargaon, Maharashtra 423601",
+                style: TypographyConstants.textStyle14Pt(
+                  context,
+                  color: ColorConstants.textHighEm,
+                ),
+              ),
+              WidgetConstants.space12Pt(vertical: true, context: context),
+            ],
           ),
-          WidgetConstants.space64Pt(vertical: false, context: context),
-          SizedBox(
-            width: ValueConstants.screenWidth(context) * 0.4,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Get in touch.",
-                  style: TypographyConstants.textStyle26Pt(context,
-                      color: ColorConstants.textHighEm, isBold: false),
-                ),
-                WidgetConstants.space20Pt(vertical: true, context: context),
-                ReusableTextField(
-                  labelText: "Email",
-                  controller: _emailController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email or email';
-                    }
-                    return null;
-                  },
-                ),
-                WidgetConstants.space16Pt(vertical: true, context: context),
-                ReusableTextField(
-                  labelText: "Message",
-                  controller: _bodyController,
-                  maxLines: 4,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter the message';
-                    }
-                    return null;
-                  },
-                ),
-                WidgetConstants.space16Pt(vertical: true, context: context),
-                ExpandedButton(
+        ),
+        WidgetConstants.space64Pt(vertical: false, context: context),
+        SizedBox(
+          width: ValueConstants.screenWidth(context) * 0.4,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Get in touch.",
+                style: TypographyConstants.textStyle26Pt(context,
+                    color: ColorConstants.textHighEm, isBold: false),
+              ),
+              WidgetConstants.space20Pt(vertical: true, context: context),
+              ReusableTextField(
+                labelText: "Email",
+                controller: _emailController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email or email';
+                  }
+                  return null;
+                },
+              ),
+              WidgetConstants.space16Pt(vertical: true, context: context),
+              ReusableTextField(
+                labelText: "Message",
+                controller: _bodyController,
+                maxLines: 4,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter the message';
+                  }
+                  return null;
+                },
+              ),
+              WidgetConstants.space16Pt(vertical: true, context: context),
+              ExpandedButton(
                   color: ColorConstants.accentPurple,
                   isFill: true,
                   textColor: ColorConstants.textLowEm,
                   text: "Send",
-                ),
-              ],
-            ),
+                  onTap: () {}),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

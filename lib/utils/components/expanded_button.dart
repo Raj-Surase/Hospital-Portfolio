@@ -10,12 +10,14 @@ class ExpandedButton extends StatelessWidget {
   bool? isBorder;
   bool? isFill;
   Color textColor;
+  VoidCallback onTap;
   ExpandedButton({
     required this.color,
     required this.text,
     this.isBorder,
     this.isFill,
     this.textColor = ColorConstants.textHighEm,
+    required this.onTap,
     super.key,
   });
 
@@ -25,7 +27,7 @@ class ExpandedButton extends StatelessWidget {
       cursor: SystemMouseCursors.click, // Change cursor to hand pointer
 
       child: GestureDetector(
-        onTap: () {},
+        onTap: onTap,
         child: Container(
           // height: ValueConstants.container32Px(context),
           padding: EdgeInsets.fromLTRB(20, 5, 20, 5),

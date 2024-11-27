@@ -13,7 +13,9 @@ class InformationSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ValueConstants.screenHeight(context) * 0.6,
+      height: ValueConstants.isMobileDevice(context)
+          ? ValueConstants.screenHeight(context) * 0.25
+          : ValueConstants.screenHeight(context) * 0.6,
       width: ValueConstants.screenWidth(context) * 0.95,
       padding: EdgeInsets.all(
         ValueConstants.padding16Px(context),
@@ -69,6 +71,7 @@ class InformationSection extends StatelessWidget {
                   text: "Contact Me",
                   isBorder: true,
                   textColor: ColorConstants.accentPurple,
+                  onTap: () {},
                 ),
               ),
             ],
